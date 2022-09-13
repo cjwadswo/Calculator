@@ -4,6 +4,9 @@ const additionButton = document.getElementById("add");
 const subtractionButton = document.getElementById("subtract");
 const multiplicationButton = document.getElementById("multiply");
 const divisionButton = document.getElementById("divide");
+const equalButton = document.getElementById("equal");
+const clearButton = document.getElementById("clear");
+
 
 let leftOperand = 0;
 let rightOperand = 0;
@@ -53,6 +56,13 @@ function updateDisplay(){
     display.textContent = rightOperand;
    }
 
+   if(evaluateBool) {
+    expressionDisplay.textContent = leftOperand+operator+rightOperand + '=';
+    display.textContent = result;
+    evaluateBool = false;
+    rightOperand = 0;
+   }
+
 
 }
 
@@ -60,12 +70,11 @@ function updateDisplay(){
 function initializeOperatorButtons() {
 
     additionButton.addEventListener('click',additionEvent);
-    //Subtraction event listener
     subtractionButton.addEventListener('click',subtractionEvent);
-    //Multiplication event listener
     multiplicationButton.addEventListener('click',multiplicationEvent);
-    //Division event listener
     divisionButton.addEventListener('click',divisionEvent);
+    equalButton.addEventListener('click',evaluate);
+    clearButton.addEventListener('click',clearScreen);
 }
 
 function additionEvent() {
@@ -88,24 +97,40 @@ function divisionEvent() {
     updateDisplay();
 }
 
+
+
 function evaluate() {
+    let a = parseInt(leftOperand);
+    let b = parseInt(rightOperand);
     switch (operator) {
         case '+':
-            add(leftOperand,rightOperand);
+            result = add(a,b);
+            evaluateBool = true;
+            updateDisplay();
+            leftOperand = "" + result;
             break;
         case '-':
-            subtract(leftOperand,rightOperand);
+            result = subtract(a,b);
+            evaluateBool = true;
+            updateDisplay();
+            leftOperand = "" + result;
             break;
         case 'x':
-            multiply(leftOperand,rightOperand);
+            result = multiply(a,b);
+            evaluateBool = true;
+            updateDisplay();
+            leftOperand = "" + result;
             break;
         case '/':
-            divide(leftOperand,rightOperand);
+            result = divide(a,b);
+            evaluateBool = true;
+            updateDisplay();
+            leftOperand = "" + result;
             break;
     }
 }
 
-function add(a,b) {
+function add(a,b){
     return a + b;
 }
 
@@ -121,5 +146,8 @@ function divide(a,b) {
     return a/b;
 }
 
+function clearScreen() {
+
+}
 initalizeNumberButtons();
 initializeOperatorButtons();

@@ -147,7 +147,13 @@ function divide(a,b) {
 }
 
 function clearScreen() {
-
+    leftOperand = 0;
+    rightOperand = 0;
+    result = null;
+    operator = null;
+    evaluateBool = false;
+    display.textContent = "";
+    expressionDisplay.textContent = "";
 }
 initalizeNumberButtons();
 initializeOperatorButtons();

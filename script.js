@@ -6,6 +6,7 @@ const multiplicationButton = document.getElementById("multiply");
 const divisionButton = document.getElementById("divide");
 const equalButton = document.getElementById("equal");
 const clearButton = document.getElementById("clear");
+const decimalButton = document.getElementById('decimal');
 
 
 let leftOperand = 0;
@@ -23,11 +24,28 @@ function initalizeNumberButtons() {
         numberButton = document.querySelector(`#num${i}`);
         numberButton.addEventListener('click', updateOperand);    
     } 
+    decimalButton.addEventListener('click',updateOperand);
 }
 
 function updateOperand(e) {
     let numberSelected = e.target.textContent;
-    if(operator != null) {
+    if(numberSelected == '.'){
+        if(operator != null) {
+            if(rightOperand == 0) {
+                rightOperand = numberSelected;
+            }
+            else {
+                rightOperand += numberSelected;
+            }
+        }
+        else if(leftOperand == 0) {
+            leftOperand = numberSelected;
+        }
+        else if (leftOperand != 0 ) {
+            leftOperand += numberSelected;
+        }
+    }
+    else if(operator != null) {
         if(rightOperand == 0) {
             rightOperand = numberSelected;
         }
@@ -38,7 +56,7 @@ function updateOperand(e) {
     else if(leftOperand == 0) {
         leftOperand = numberSelected;
     }
-    else if (leftOperand != 0) {
+    else if (leftOperand != 0 ) {
         leftOperand += numberSelected;
     }
 
@@ -100,8 +118,8 @@ function divisionEvent() {
 
 
 function evaluate() {
-    let a = parseInt(leftOperand);
-    let b = parseInt(rightOperand);
+    let a = parseFloat(leftOperand);
+    let b = parseFloat(rightOperand);
     switch (operator) {
         case '+':
             result = add(a,b);

@@ -35,14 +35,18 @@ function updateOperand(e) {
                 rightOperand = numberSelected;
             }
             else {
-                rightOperand += numberSelected;
+                if (!rightOperand.includes('.')) {
+                    rightOperand += numberSelected;
+                }
             }
         }
         else if(leftOperand == 0) {
             leftOperand = numberSelected;
         }
         else if (leftOperand != 0 ) {
-            leftOperand += numberSelected;
+            if(!leftOperand.includes('.')) {
+                leftOperand += numberSelected;
+            }
         }
     }
     else if(operator != null) {
